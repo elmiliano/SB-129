@@ -5,6 +5,6 @@ class HumidityScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Text('Humidity Screen');
   }
 }
