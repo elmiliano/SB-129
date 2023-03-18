@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class navbarScreen extends StatelessWidget {
-  navbarScreen({super.key});
+class NavbarScreen extends StatelessWidget {
+  NavbarScreen({super.key});
 
   List<Widget> screens = [];
   int index = 0;
