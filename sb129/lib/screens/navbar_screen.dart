@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:sb129/screens/screens.dart';
 
 class NavbarScreen extends StatelessWidget {
   NavbarScreen({super.key});
 
-  List<Widget> screens = [];
+  List<Widget> screens = [
+    const TempScreen(),
+    const HumidityScreen(),
+    const GraphScreen()
+  ];
   int index = 0;
 
   @override
