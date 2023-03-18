@@ -8,6 +8,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'SB-129', home: NavbarScreen());
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'SB-129',
+        home: NavbarScreen());
   }
 }
