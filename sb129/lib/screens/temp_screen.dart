@@ -40,8 +40,9 @@ class TempScreen extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 76,),
             Text(
-              "detalles",
+              "ESTADO DE PUERTAS",
               style: GoogleFonts.staatliches(fontSize: 48, color: Colors.black),
             ),
             Row(
