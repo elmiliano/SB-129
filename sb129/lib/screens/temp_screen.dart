@@ -8,11 +8,11 @@ class TempScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Container(
               height: 262,
               width: double.infinity,
               decoration:
@@ -40,30 +40,46 @@ class TempScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          Text(
-            "detalles",
-            style: GoogleFonts.raleway(fontSize: 16, color: Colors.black),
-          ),
-          Row(
-            children: [
-              Container(
-                height: 99,
-                width: 100,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.black, //color of border
-                    width: 1, //width of border
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          )
-        ],
+            Text(
+              "detalles",
+              style: GoogleFonts.staatliches(fontSize: 48, color: Colors.black),
+            ),
+            Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+              children: const[
+                DoorStateWidget(),
+                SizedBox(width: 8),
+                DoorStateWidget()
+              ],
+            )
+          ],
+        ),
       ),
       backgroundColor: Colors.white,
+    );
+  }
+}
+
+class DoorStateWidget extends StatelessWidget {
+  const DoorStateWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        height: 99,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black, //color of border
+            width: 1, //width of border
+          ),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          color: Color.fromRGBO(106, 213, 203, 100),
+        ),
+        child: Icon(Icons.lock),
+      ),
     );
   }
 }
