@@ -28,7 +28,7 @@ class _NavbarScreenState extends State<NavbarScreen> {
   final pages = [
     const TempScreen(),
     const HumidityScreen(),
-    const GraphScreen()
+    GraphScreen()
   ];
 
   int index = 0;
@@ -36,7 +36,10 @@ class _NavbarScreenState extends State<NavbarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Navbar Screen')),
+        appBar: AppBar(
+          title: const Text('Navbar Screen'),
+          backgroundColor: Color.fromRGBO(106, 213, 203, 1),
+          ),
         body: SizedBox.expand(
           child: PageView(
             controller: pageController,
