@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GraphScreen extends StatelessWidget {
 
@@ -83,6 +84,10 @@ class GraphScreen extends StatelessWidget {
             ]
           )
         ),
+        SizedBox(height: 15,),
+        Text('DETALLES',style: GoogleFonts.raleway(textStyle: const TextStyle(fontSize: 20),fontWeight: FontWeight.bold),),
+        SizedBox(height: 15),
+        TablaDeTemps()
       ],
     );
   }
@@ -93,3 +98,72 @@ class ChartData {
     final double x;
     final double y;
 }
+
+class TablaDeTemps extends StatelessWidget {
+  List<Map> data = [
+    {
+      'temp': 30,
+      'timePassed': 10,
+    },
+    {
+      'temp': 32,
+      'timePassed': 20,
+    },
+    {
+      'temp': 33,
+      'timePassed': 30,
+    },
+    {
+      'temp': 31,
+      'timePassed': 40,
+    },
+    {
+      'temp': 29,
+      'timePassed': 50,
+    },
+    {
+      'temp': 32,
+      'timePassed': 60,
+    },
+  ];
+  @override
+    Widget build(BuildContext context) {
+      
+      return DataTable(
+        columns: <DataColumn>[
+          DataColumn(
+            label: Expanded(
+              child: Center(
+                child: Text(
+                  'Grados',
+                  style: GoogleFonts.raleway(textStyle: const TextStyle(fontSize: 18)),
+                ),
+              ),
+            ),
+          ),
+          DataColumn(
+            label: Expanded(
+              child: Center(
+                child: Text(
+                  'Tiempo',
+                  style: GoogleFonts.raleway(textStyle: const TextStyle(fontSize: 18)),
+                ),
+              ),
+            ),
+          ),
+        ],
+        rows:_createRows() 
+      );
+    }
+
+    List<DataRow> _createRows() {
+    return data
+        .map((dato) => DataRow(cells: [
+              DataCell(Center(child: Text( dato['temp'].toString() + ' C',style: GoogleFonts.raleway(textStyle: const TextStyle(fontSize: 15))))),
+              DataCell(Center(child: Text('Hace ' + dato['timePassed'].toString() + ' segundos.',style: GoogleFonts.raleway(textStyle: const TextStyle(fontSize: 15))))),
+            ]))
+        .toList();
+  }
+}
+
+
