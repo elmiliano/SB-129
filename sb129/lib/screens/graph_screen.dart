@@ -1,26 +1,44 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sb129/models/historial_model.dart';
+import 'package:sb129/services/services.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GraphScreen extends StatelessWidget {
-  final List<ChartData> chartData = [
-    ChartData(10.5, 25),
-    ChartData(11, 28),
-    ChartData(11.5, 24),
-    ChartData(12, 22),
-    ChartData(12.5, 24),
-    ChartData(13, 25),
-    ChartData(13.5, 28),
-    ChartData(14.5, 24),
-    ChartData(15, 22),
-    ChartData(15.5, 26)
-  ];
+  
 
   GraphScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+
+    final histService = Provider.of<HistTempService>(context);
+    if( histService.isLoading) return const Center(child: SizedBox(height: 150,width: 150 ,child: CircularProgressIndicator()));
+    print(histService.hist.temperatura);
+
+    final List<ChartData> chartData = [];
+
+    for (var i = 0; i < histService.hist.temperatura.length; i++){
+
+      chartData.add(ChartData(histService.hist.time[i].toDouble(), histService.hist.temperatura[i].toDouble()));
+    }
+
+    /* final List<ChartData> chartData = [
+      ChartData(10.5, histService.hist.temperatura[0].toDouble()),
+      ChartData(11, 28),
+      ChartData(11.5, 24),
+      ChartData(12, 22),
+      ChartData(12.5, 24),
+      ChartData(13, 25),
+      ChartData(13.5, 28),
+      ChartData(14.5, 24),
+      ChartData(15, 22),
+      ChartData(15.5, 26)
+    ]; */
 
     return SingleChildScrollView(
       child: Column(
@@ -86,7 +104,7 @@ class GraphScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 15),
-          TablaDeTemps()
+          TablaDeTemps(time:histService.hist.time, temp:histService.hist.temperatura )
         ],
       ),
     );
@@ -100,34 +118,23 @@ class ChartData {
 }
 
 class TablaDeTemps extends StatelessWidget {
-  List<Map> data = [
-    {
-      'temp': 30,
-      'timePassed': 10,
-    },
-    {
-      'temp': 32,
-      'timePassed': 20,
-    },
-    {
-      'temp': 33,
-      'timePassed': 30,
-    },
-    {
-      'temp': 31,
-      'timePassed': 40,
-    },
-    {
-      'temp': 29,
-      'timePassed': 50,
-    },
-    {
-      'temp': 32,
-      'timePassed': 60,
-    },
-  ];
+  
+
+  TablaDeTemps({required this.temp,required this.time});
+
+  final List temp;
+  final List time;
+
+  List<Map> data = [];
   @override
   Widget build(BuildContext context) {
+
+    for (var i = 0; i < temp.length; i++){
+      data.add({'timePassed':time[i], 'temp': temp[i]});
+    }
+
+    print(data);
+
     return DataTable(columns: <DataColumn>[
       DataColumn(
         label: Expanded(
