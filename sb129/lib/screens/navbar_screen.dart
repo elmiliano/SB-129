@@ -42,51 +42,9 @@ class _NavbarScreenState extends State<NavbarScreen> {
           children: [
             Container(
               height: 10,
-              color: Color.fromRGBO(228, 228, 228, 100),
+              color: const Color.fromRGBO(228, 228, 228, 100),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                width: double.infinity,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 66,
-                      width: 66,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              bottomLeft: Radius.circular(10)),
-                          color: Color.fromRGBO(106, 213, 203, 100)),
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 66,
-                        decoration: const BoxDecoration(
-                            color: Color.fromRGBO(228, 228, 228, 100)),
-                        child: Text(
-                          "temperatura",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.raleway(
-                              fontSize: 48,
-                              color: const Color.fromRGBO(139, 139, 139, 100)),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 66,
-                      width: 66,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(10),
-                              bottomRight: Radius.circular(10)),
-                          color: Color.fromRGBO(106, 213, 203, 100)),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            
             Expanded(
               child: PageView(
                 controller: pageController,
@@ -97,7 +55,7 @@ class _NavbarScreenState extends State<NavbarScreen> {
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Color.fromRGBO(106, 213, 203, 100),
+          selectedItemColor: const Color.fromRGBO(106, 213, 203, 100),
           items: const [
             BottomNavigationBarItem(
                 label: "temperature", icon: Icon(Icons.thermostat_sharp)),
@@ -113,3 +71,4 @@ class _NavbarScreenState extends State<NavbarScreen> {
         ));
   }
 }
+

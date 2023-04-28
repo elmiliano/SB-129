@@ -1,6 +1,9 @@
 import 'dart:math';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:sb129/widgets/widgets.dart';
+
+
 
 class TempScreen extends StatelessWidget {
   const TempScreen({super.key});
@@ -14,6 +17,7 @@ class TempScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            const TopScreenTitleWidget(title: 'temperatura',),
             Container(
               height: 262,
               width: double.infinity,
@@ -136,3 +140,6 @@ class _DoorButtonWidgetState extends State<DoorButtonWidget> {
     );
   }
 }
+
+
+
