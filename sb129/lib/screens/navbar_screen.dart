@@ -29,7 +29,7 @@ class _NavbarScreenState extends State<NavbarScreen> {
   final pages = [
     const TempScreen(),
     const HumidityScreen(),
-    const GraphScreen()
+    GraphScreen()
   ];
 
   int index = 0;
@@ -53,6 +53,7 @@ class _NavbarScreenState extends State<NavbarScreen> {
               ),
             ),
           ],
+
         ),
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: const Color.fromRGBO(106, 213, 203, 100),
