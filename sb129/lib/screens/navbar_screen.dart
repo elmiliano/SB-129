@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sb129/screens/screens.dart';
 
 class NavbarScreen extends StatefulWidget {
@@ -36,18 +37,26 @@ class _NavbarScreenState extends State<NavbarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Navbar Screen'),
-          backgroundColor: Color.fromRGBO(106, 213, 203, 1),
-          ),
-        body: SizedBox.expand(
-          child: PageView(
-            controller: pageController,
-            onPageChanged: changeScreen,
-            children: pages,
-          ),
+        // appBar: AppBar(title: const Text('Navbar Screen')),
+        body: Column(
+          children: [
+            Container(
+              height: 10,
+              color: const Color.fromRGBO(228, 228, 228, 100),
+            ),
+            
+            Expanded(
+              child: PageView(
+                controller: pageController,
+                onPageChanged: changeScreen,
+                children: pages,
+              ),
+            ),
+          ],
+
         ),
         bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: const Color.fromRGBO(106, 213, 203, 100),
           items: const [
             BottomNavigationBarItem(
                 label: "temperature", icon: Icon(Icons.thermostat_sharp)),
@@ -63,3 +72,4 @@ class _NavbarScreenState extends State<NavbarScreen> {
         ));
   }
 }
+
