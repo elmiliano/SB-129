@@ -3,7 +3,9 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sb129/models/historial_model.dart';
+import 'package:sb129/screens/temp_screen.dart';
 import 'package:sb129/services/services.dart';
+import 'package:sb129/widgets/widgets.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,25 +29,10 @@ class GraphScreen extends StatelessWidget {
       chartData.add(ChartData(histService.hist.time[i].toDouble(), histService.hist.temperatura[i].toDouble()));
     }
 
-    /* final List<ChartData> chartData = [
-      ChartData(10.5, histService.hist.temperatura[0].toDouble()),
-      ChartData(11, 28),
-      ChartData(11.5, 24),
-      ChartData(12, 22),
-      ChartData(12.5, 24),
-      ChartData(13, 25),
-      ChartData(13.5, 28),
-      ChartData(14.5, 24),
-      ChartData(15, 22),
-      ChartData(15.5, 26)
-    ]; */
-
     return SingleChildScrollView(
       child: Column(
         children: [
-          const SizedBox(
-            height: 15,
-          ),
+          const TopScreenTitleWidget(title: 'historial',),
           Container(
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -73,7 +60,7 @@ class GraphScreen extends StatelessWidget {
                       width: 1,
                       color: Colors.white,
                     ),
-                    minorGridLines: MinorGridLines(
+                    minorGridLines: const MinorGridLines(
                         width: 1,
                         color: Colors.green,
                         dashArray: <double>[5, 5]),
@@ -94,7 +81,7 @@ class GraphScreen extends StatelessWidget {
                         xValueMapper: (ChartData data, _) => data.x,
                         yValueMapper: (ChartData data, _) => data.y)
                   ])),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Text(
@@ -103,8 +90,31 @@ class GraphScreen extends StatelessWidget {
                 textStyle: const TextStyle(fontSize: 20),
                 fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 15),
-          TablaDeTemps(time:histService.hist.time, temp:histService.hist.temperatura )
+          const SizedBox(height: 15),
+          TablaDeTemps(time:histService.hist.time, temp:histService.hist.temperatura ),
+          const SizedBox(
+              height: 76,
+            ),
+            Text(
+              "ESTADO DE PUERTAS",
+              style: GoogleFonts.staatliches(fontSize: 48, color: Colors.black),
+            ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                DoorButtonWidget(
+                  width: width,
+                  title: 'PUERTA 1',
+                ),
+                const SizedBox(width: 8),
+                DoorButtonWidget(
+                  width: width,
+                  title: 'PUERTA 2',
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
