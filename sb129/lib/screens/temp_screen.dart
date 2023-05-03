@@ -1,9 +1,6 @@
-import 'dart:math';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:sb129/widgets/widgets.dart';
-
-
 
 class TempScreen extends StatelessWidget {
   const TempScreen({super.key});
@@ -11,13 +8,14 @@ class TempScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            const TopScreenTitleWidget(title: 'temperatura',),
+            const TopScreenTitleWidget(
+              title: 'temperatura',
+            ),
             Container(
               height: 262,
               width: double.infinity,
@@ -53,21 +51,19 @@ class TempScreen extends StatelessWidget {
               "ESTADO DE PUERTAS",
               style: GoogleFonts.staatliches(fontSize: 48, color: Colors.black),
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DoorButtonWidget(
-                    width: width,
-                    title: 'PUERTA 1',
-                  ),
-                  const SizedBox(width: 8),
-                  DoorButtonWidget(
-                    width: width,
-                    title: 'PUERTA 2',
-                  ),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                DoorButtonWidget(
+                  width: width,
+                  title: 'PUERTA 1',
+                ),
+                const SizedBox(width: 8),
+                DoorButtonWidget(
+                  width: width,
+                  title: 'PUERTA 2',
+                ),
+              ],
             )
           ],
         ),
@@ -101,7 +97,6 @@ class _DoorButtonWidgetState extends State<DoorButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Column(
       children: [
         ElevatedButton(
@@ -110,7 +105,6 @@ class _DoorButtonWidgetState extends State<DoorButtonWidget> {
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
           ),
-
           onPressed: changeButton,
           child: Container(
             height: 91,
@@ -121,11 +115,13 @@ class _DoorButtonWidgetState extends State<DoorButtonWidget> {
                 width: 1, //width of border
               ),
               borderRadius: const BorderRadius.all(Radius.circular(10)),
-              color: colorState == true ? const Color.fromRGBO(106, 213, 203, 100)
-              : const Color.fromRGBO(201, 93, 99, 100),
+              color: colorState == true
+                  ? const Color.fromRGBO(106, 213, 203, 100)
+                  : const Color.fromRGBO(201, 93, 99, 100),
             ),
-            child: colorState == true ? const Icon(Icons.lock)
-              : const Icon(Icons.lock_open),
+            child: colorState == true
+                ? const Icon(Icons.lock)
+                : const Icon(Icons.lock_open),
           ),
         ),
         const SizedBox(
@@ -140,6 +136,3 @@ class _DoorButtonWidgetState extends State<DoorButtonWidget> {
     );
   }
 }
-
-
-

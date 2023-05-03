@@ -1,8 +1,5 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sb129/models/historial_model.dart';
 import 'package:sb129/screens/temp_screen.dart';
 import 'package:sb129/services/services.dart';
 import 'package:sb129/widgets/widgets.dart';
@@ -10,29 +7,33 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GraphScreen extends StatelessWidget {
-  
-
-  GraphScreen({super.key});
+  const GraphScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
     final histService = Provider.of<HistTempService>(context);
-    if( histService.isLoading) return const Center(child: SizedBox(height: 150,width: 150 ,child: CircularProgressIndicator()));
+    if (histService.isLoading) {
+      return const Center(
+          child: SizedBox(
+              height: 150, width: 150, child: CircularProgressIndicator()));
+    }
     print(histService.hist.temperatura);
 
     final List<ChartData> chartData = [];
 
-    for (var i = 0; i < histService.hist.temperatura.length; i++){
-
-      chartData.add(ChartData(histService.hist.time[i].toDouble(), histService.hist.temperatura[i].toDouble()));
+    for (var i = 0; i < histService.hist.temperatura.length; i++) {
+      chartData.add(ChartData(histService.hist.time[i].toDouble(),
+          histService.hist.temperatura[i].toDouble()));
     }
 
     return SingleChildScrollView(
       child: Column(
         children: [
-          const TopScreenTitleWidget(title: 'historial',),
+          const TopScreenTitleWidget(
+            title: 'historial',
+          ),
           Container(
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -91,29 +92,28 @@ class GraphScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 15),
-          TablaDeTemps(time:histService.hist.time, temp:histService.hist.temperatura ),
+          TablaDeTemps(
+              time: histService.hist.time, temp: histService.hist.temperatura),
           const SizedBox(
-              height: 76,
-            ),
-            Text(
-              "ESTADO DE PUERTAS",
-              style: GoogleFonts.staatliches(fontSize: 48, color: Colors.black),
-            ),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                DoorButtonWidget(
-                  width: width,
-                  title: 'PUERTA 1',
-                ),
-                const SizedBox(width: 8),
-                DoorButtonWidget(
-                  width: width,
-                  title: 'PUERTA 2',
-                ),
-              ],
-            ),
+            height: 76,
+          ),
+          Text(
+            "ESTADO DE PUERTAS",
+            style: GoogleFonts.staatliches(fontSize: 48, color: Colors.black),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              DoorButtonWidget(
+                width: width,
+                title: 'PUERTA 1',
+              ),
+              const SizedBox(width: 8),
+              DoorButtonWidget(
+                width: width,
+                title: 'PUERTA 2',
+              ),
+            ],
           )
         ],
       ),
@@ -128,9 +128,7 @@ class ChartData {
 }
 
 class TablaDeTemps extends StatelessWidget {
-  
-
-  TablaDeTemps({required this.temp,required this.time});
+  TablaDeTemps({super.key, required this.temp, required this.time});
 
   final List temp;
   final List time;
@@ -138,9 +136,8 @@ class TablaDeTemps extends StatelessWidget {
   List<Map> data = [];
   @override
   Widget build(BuildContext context) {
-
-    for (var i = 0; i < temp.length; i++){
-      data.add({'timePassed':time[i], 'temp': temp[i]});
+    for (var i = 0; i < temp.length; i++) {
+      data.add({'timePassed': time[i], 'temp': temp[i]});
     }
 
     print(data);
@@ -175,12 +172,11 @@ class TablaDeTemps extends StatelessWidget {
     return data
         .map((dato) => DataRow(cells: [
               DataCell(Center(
-                  child: Text(dato['temp'].toString() + ' C',
+                  child: Text('${dato['temp']} C',
                       style: GoogleFonts.raleway(
                           textStyle: const TextStyle(fontSize: 15))))),
               DataCell(Center(
-                  child: Text(
-                      'Hace ' + dato['timePassed'].toString() + ' segundos.',
+                  child: Text('Hace ${dato['timePassed']} segundos.',
                       style: GoogleFonts.raleway(
                           textStyle: const TextStyle(fontSize: 15))))),
             ]))

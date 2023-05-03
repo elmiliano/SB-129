@@ -1,1 +1,1 @@
-export 'package:sb129/services/histService.dart';
+export 'package:sb129/services/hist_service.dart';

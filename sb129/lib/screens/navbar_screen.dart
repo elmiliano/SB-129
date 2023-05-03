@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:sb129/screens/screens.dart';
 
 class NavbarScreen extends StatefulWidget {
-  NavbarScreen({super.key});
+  const NavbarScreen({super.key});
 
   @override
   State<NavbarScreen> createState() => _NavbarScreenState();
@@ -29,7 +28,7 @@ class _NavbarScreenState extends State<NavbarScreen> {
   final pages = [
     const TempScreen(),
     const HumidityScreen(),
-    GraphScreen()
+    const GraphScreen()
   ];
 
   int index = 0;
@@ -44,7 +43,6 @@ class _NavbarScreenState extends State<NavbarScreen> {
               height: 10,
               color: const Color.fromRGBO(228, 228, 228, 100),
             ),
-            
             Expanded(
               child: PageView(
                 controller: pageController,
@@ -53,7 +51,6 @@ class _NavbarScreenState extends State<NavbarScreen> {
               ),
             ),
           ],
-
         ),
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: const Color.fromRGBO(106, 213, 203, 100),
@@ -72,4 +69,3 @@ class _NavbarScreenState extends State<NavbarScreen> {
         ));
   }
 }
-

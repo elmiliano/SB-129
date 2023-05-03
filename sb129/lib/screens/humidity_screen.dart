@@ -9,18 +9,19 @@ class HumidityScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            const TopScreenTitleWidget(title: 'humedad',),
+            const TopScreenTitleWidget(
+              title: 'humedad',
+            ),
             Container(
               height: 262,
               width: double.infinity,
-              decoration:
-                  const BoxDecoration(color: Color.fromRGBO(106, 213, 203, 100)),
+              decoration: const BoxDecoration(
+                  color: Color.fromRGBO(106, 213, 203, 100)),
               child: Column(
                 //mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -45,21 +46,19 @@ class HumidityScreen extends StatelessWidget {
               "ESTADO DE PUERTAS",
               style: GoogleFonts.staatliches(fontSize: 48, color: Colors.black),
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DoorButtonWidget(
-                    width: width,
-                    title: 'PUERTA 1',
-                  ),
-                  const SizedBox(width: 8),
-                  DoorButtonWidget(
-                    width: width,
-                    title: 'PUERTA 2',
-                  ),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                DoorButtonWidget(
+                  width: width,
+                  title: 'PUERTA 1',
+                ),
+                const SizedBox(width: 8),
+                DoorButtonWidget(
+                  width: width,
+                  title: 'PUERTA 2',
+                ),
+              ],
             )
           ],
         ),
