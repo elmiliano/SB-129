@@ -36,21 +36,20 @@ class _NavbarScreenState extends State<NavbarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(title: const Text('Navbar Screen')),
-        body: Column(
-          children: [
-            Container(
-              height: 10,
-              color: const Color.fromRGBO(228, 228, 228, 100),
-            ),
-            Expanded(
-              child: PageView(
-                controller: pageController,
-                onPageChanged: changeScreen,
-                children: pages,
+        backgroundColor: Colors.white,
+        body: Padding(
+          padding: const EdgeInsets.only(top: 40),
+          child: Column(
+            children: [
+              Expanded(
+                child: PageView(
+                  controller: pageController,
+                  onPageChanged: changeScreen,
+                  children: pages,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: const Color.fromRGBO(106, 213, 203, 100),
