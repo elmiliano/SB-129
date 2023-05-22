@@ -5,7 +5,7 @@ import 'package:sb129/models/models.dart';
 import 'package:http/http.dart' as http;
 
 class HistTempService extends ChangeNotifier {
-  final String _baseUrl = 'sb-129-eab59-default-rtdb.firebaseio.com';
+  final String _baseUrl = 'https://sb-129-proj-default-rtdb.firebaseio.com/';
   late HistTemp hist;
   bool isLoading = true;
 
