@@ -22,6 +22,3 @@ ref = db.reference("/")
 with open("python/data.json", "r") as file:
 	file_contents = json.load(file)
 ref.set(file_contents)
-with open("python/data.json", "r") as file:
-	file_contents = json.load(file)
-ref.set(file_contents)
