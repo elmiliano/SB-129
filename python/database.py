@@ -7,79 +7,87 @@ import time
 import json
 
 historial = {
-    "temperatura": [],
-    "time": []
-}
+            "temperatura": [],
+            "time": []
+        }
 
 #MAIN
-def main():
+if __name__ == "__main__":
+    def main():
 
-    #ARDUINO CONNECTION
-    port = ''
-    data = [10,1,2,3,0]
-    count = 1
-    delay = 5
+        #CONFIG DE CONEXION CON BD FIREBASE
+        # path = 'python/sb-129-proj-f1b72e0e0f19.json'
+        path = "C:/Users/emili/Documents/Code/SB-129/SB-129/python/sb-129-proj-f1b72e0e0f19.json"
+        databaseURL = "https://sb-129-proj-default-rtdb.firebaseio.com/"
 
-    #CONFIG DE CONEXION CON BD FIREBASE
-    path = 'python/sb-129-proj-f1b72e0e0f19.json'
-    databaseURL = 'https://sb-129-proj-default-rtdb.firebaseio.com/'
+        #ARDUINO CONNECTION
+        json_path = 'C:/Users/emili/Documents/Code/SB-129/SB-129/python/data.json'
+        port  = 'COM3'
+        data  = ''
+        count = 0
+        delay = 5
+        ctd   = 3
 
-    cred = credentials.Certificate(path)
-    firebase_admin.initialize_app(cred, {'databaseURL': databaseURL})
-    ref = db.reference("/")
-
-    #ABRIR PUERTO
-    try:
-        #arduino = serial.Serial(port, timeout=1, baudrate=None)    <-- Para cambiar baudrate
+        cred = credentials.Certificate(path)
+        firebase_admin.initialize_app(cred, {'databaseURL': databaseURL})
+        ref = db.reference("/")
+                
+        #ABRIR PUERTO 
+        arduino = serial.Serial(port, timeout=1, baudrate=9600)
+        print('ARDUINO', arduino)
         #arduino = serial.Serial(port, timeout=1)
-        pass
-    except:
-        print('ERROR EN PUERTO')
-        
-    #RECIBIR INFO DE ARDUINO
-    while count < 6:
-        #data.append(str(arduino.readline()))
 
-        data = [ i*count for i in data ]
-        data[4] = count % 2
-        print(data)
+        #RECIBIR INFO DE ARDUINO
+        while count < 30:
+            data = str(arduino.readline())[2:-5] + ";" + str(count)
+            final_data = clean(data, ctd)
 
-        final_data = clean(data)
-        write(final_data, ref)
-        time.sleep(delay)
-        count += 1
+            if (final_data != None) :
+                write(final_data, ref, json_path)
+            
+            count += 1
 
-    # ENVIO DE DATOS DE JSON A FIREBASE
-    final_data = clean(data)
-    write(final_data)
 
 
 #METODOS PARA ESCRITURA EN DATA.JSON
-def clean(list):
-
-    historial["temperatura"].append(list[2])
-    historial["time"].append(list[3])
+def clean(data, ctd):
     
-    final_data = {
-        "temperatura" : list[0],
-        "humedad" : list[1],
-        "puertas" : list[4],
-        "historial" : {
-             "temperatura": historial["temperatura"],
-             "time": historial["time"]
-        },
-    }
+    list = data.split(';')
+    
+    try:
+        if 0 < float(list[0]) < 100:
 
-    return final_data
+            historial["temperatura"].append(float(list[0]))
+            historial["time"].append(float(list[3]))
 
-def write(dict, ref):
+            if ( len(historial["temperatura"]) > ctd ) :
+                historial["temperatura"].pop(0)
+                historial["time"].pop(0)
 
-    file = open("python/data.json", mode = 'w')
+            final_data = {
+                "temperatura" : float(list[0]),
+                "humedad" : float(list[1]),
+                # "puertas" : list[4],
+                "historial" : {
+                    "temperatura": historial["temperatura"],
+                    "time": historial["time"]
+                },
+            }
 
-    with open("python/data.json", "w") as outfile:
+        return final_data
+    
+    except:
+        pass
+    
+
+def write(dict, ref, path):
+
+    print(dict)
+
+    with open(path, "w") as outfile:
         json.dump(dict, outfile)
 
-    with open("python/data.json", "r") as file:
+    with open(path, "r") as file:
         file_contents = json.load(file)
     ref.set(file_contents)
 
