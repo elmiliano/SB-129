@@ -53,12 +53,17 @@ if __name__ == "__main__":
 def clean(data, ctd):
     
     list = data.split(';')
+
+    # print(list)
+
+    t = time.localtime()
+    current_time = time.strftime("%H:%M:%S", t)
     
     try:
         if 0 < float(list[0]) < 100:
 
             historial["temperatura"].append(float(list[0]))
-            historial["time"].append(float(list[3]))
+            historial["time"].append(current_time)
 
             if ( len(historial["temperatura"]) > ctd ) :
                 historial["temperatura"].pop(0)
@@ -67,7 +72,7 @@ def clean(data, ctd):
             final_data = {
                 "temperatura" : float(list[0]),
                 "humedad" : float(list[1]),
-                # "puertas" : list[4],
+                "puerta" : float(list[2]),
                 "historial" : {
                     "temperatura": historial["temperatura"],
                     "time": historial["time"]
