@@ -16,7 +16,7 @@ class DoorService extends ChangeNotifier {
     isLoadingdoor  = true;
     notifyListeners();
 
-    final url = Uri.https(_baseUrl, '/Puertas.json');
+    final url = Uri.https(_baseUrl, '/puerta.json');
     final resp = await http.get(url);
     print(resp.body);
     doorStr = resp.body.toString();

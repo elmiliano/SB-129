@@ -2,8 +2,8 @@
 import 'dart:convert';
 
 class HistTemp {
-    List<int> temperatura;
-    List<int> time;
+    List<double> temperatura;
+    List<String> time;
 
     HistTemp({
         required this.temperatura,
@@ -15,12 +15,12 @@ class HistTemp {
     String toJson() => json.encode(toMap());
 
     factory HistTemp.fromMap(Map<String, dynamic> json) => HistTemp(
-        temperatura: List<int>.from(json["Temperatura"].map((x) => x)),
-        time: List<int>.from(json["Time"].map((x) => x)),
+        temperatura: List<double>.from(json["temperatura"].map((x) => x)),
+        time: List<String>.from(json["time"].map((x) => x)),
     );
 
     Map<String, dynamic> toMap() => {
-        "Temperatura": List<dynamic>.from(temperatura.map((x) => x)),
-        "Time": List<dynamic>.from(time.map((x) => x)),
+        "temperatura": List<dynamic>.from(temperatura.map((x) => x)),
+        "time": List<dynamic>.from(time.map((x) => x)),
     };
 }

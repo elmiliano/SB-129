@@ -15,7 +15,7 @@ class HumService extends ChangeNotifier {
     isLoadingHum  = true;
     notifyListeners();
 
-    final url = Uri.https(_baseUrl, '/Humedad.json');
+    final url = Uri.https(_baseUrl, '/humedad.json');
     final resp = await http.get(url);
     print(resp.body);
     humedad = resp.body.toString();

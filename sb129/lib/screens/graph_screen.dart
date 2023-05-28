@@ -43,7 +43,7 @@ class _GraphScreenState extends State<GraphScreen> {
     final List<ChartData> chartData = [];
 
     for (var i = 0; i < histService.hist.temperatura.length; i++) {
-      chartData.add(ChartData(histService.hist.time[i].toDouble(),
+      chartData.add(ChartData(histService.hist.time[i].toString(),
         histService.hist.temperatura[i].toDouble()));
     }
     
@@ -59,23 +59,14 @@ class _GraphScreenState extends State<GraphScreen> {
                   title: 'historial',
                 ),
               ),
-              // IconButton(onPressed: (){Navigator.pushNamed(
-              //       context,
-              //       'home');
-              //     },
-              //   icon: Icon(Icons.arrow_back)),
-              // IconButton(onPressed:refresh,
-              //   icon: Icon(Icons.refresh)),
               Container(
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       color: Color.fromRGBO(106, 213, 203, 1)),
-                  //color: const Color.fromRGBO(106, 213, 203, 1),
                   width: width - 25,
                   height: 350,
                   child: SfCartesianChart(
                       enableAxisAnimation: true,
-                      //plotAreaBackgroundColor: const Color.fromRGBO(106, 213, 203, 1),
                       primaryYAxis: NumericAxis(
                           majorGridLines: const MajorGridLines(
                             width: 1,
@@ -88,7 +79,7 @@ class _GraphScreenState extends State<GraphScreen> {
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.w500),
                           minimum: 15),
-                      primaryXAxis: NumericAxis(
+                      primaryXAxis: CategoryAxis(
                         majorGridLines: const MajorGridLines(
                           width: 1,
                           color: Colors.white,
@@ -107,7 +98,7 @@ class _GraphScreenState extends State<GraphScreen> {
                       margin: const EdgeInsets.all(25),
                       series: <ChartSeries>[
                         // Renders line chart
-                        LineSeries<ChartData, double>(
+                        LineSeries<ChartData, String>(
                             color: Colors.white,
                             markerSettings: const MarkerSettings(isVisible: true),
                             dataSource: chartData,
@@ -148,7 +139,7 @@ class _GraphScreenState extends State<GraphScreen> {
 
 class ChartData {
   ChartData(this.x, this.y);
-  final double x;
+  final String x;
   final double y;
 }
 
