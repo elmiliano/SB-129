@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sb129/screens/navbar_screen.dart';
-import 'package:sb129/screens/temp_screen.dart';
 import 'package:sb129/services/services.dart';
 import 'package:sb129/widgets/widgets.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -21,22 +19,19 @@ class _GraphScreenState extends State<GraphScreen> {
     super.initState();
     final histService = Provider.of<HistTempService>(context, listen: false);
     histService.loadProducts();
+    final doorService = Provider.of<DoorService>(context, listen: false);
+    doorService.loadProducts();
   }
 
 
   @override
   Widget build(BuildContext context) {
-    
     HistTempService histService;
-
+    DoorService doorService;
     double width = MediaQuery.of(context).size.width;
-    //setState(() {});
     histService = Provider.of<HistTempService>(context);
+    doorService = Provider.of<DoorService>(context);
 
-    // void refresh() async {
-    //   histService = Provider.of<HistTempService>(context).loadProducts();
-    //   setState(() {});
-    // }
     if (histService.isLoading) {
       return const Center(
           child: SizedBox(
@@ -133,27 +128,16 @@ class _GraphScreenState extends State<GraphScreen> {
                   time: histService.hist.time,
                   temp: histService.hist.temperatura),
               const SizedBox(
-                height: 76,
+                height: 35,
               ),
-              Text(
-                "ESTADO DE PUERTAS",
-                style: GoogleFonts.staatliches(fontSize: 48, color: Colors.black),
+              doorService.isLoadingdoor? 
+              const Center(
+              child: SizedBox(
+                height: 150, width: 150, child: CircularProgressIndicator()))
+              :DoorWidget(width: width, title1: "Puerta 1", title2: "Puerta 2", state: doorService.door,),
+              const SizedBox(
+                height: 35,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DoorButtonWidget(
-                    width: width,
-                    title: 'PUERTA 1',
-                  ),
-                  const SizedBox(width: 8),
-                  DoorButtonWidget(
-                    width: width,
-                    title: 'PUERTA 2',
-                  ),
-                ],
-              ),
-              
             ],
           ),
         ),

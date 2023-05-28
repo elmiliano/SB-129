@@ -22,7 +22,11 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            create: (_) => HistTempService()) //servicio de Historial
+            create: (_) => HistTempService()),
+        ChangeNotifierProvider(
+            create: (_) => DoorService()),
+        ChangeNotifierProvider(
+            create: (_) => HumService()) //servicio de Historial
       ],
       child: const MyApp(),
     );

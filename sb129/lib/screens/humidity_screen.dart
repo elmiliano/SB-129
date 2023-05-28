@@ -1,14 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sb129/screens/temp_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:sb129/widgets/widgets.dart';
 
-class HumidityScreen extends StatelessWidget {
+import '../services/services.dart';
+
+class HumidityScreen extends StatefulWidget {
   const HumidityScreen({super.key});
+
+  @override
+  State<HumidityScreen> createState() => _HumidityScreenState();
+}
+
+class _HumidityScreenState extends State<HumidityScreen> {
+  @override
+  void initState() {
+    super.initState();
+    final humService = Provider.of<HumService>(context, listen: false);
+    humService.loadProducts();
+    final doorService = Provider.of<DoorService>(context, listen: false);
+    doorService.loadProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    final humService = Provider.of<HumService>(context);
+    DoorService doorService;
+    doorService = Provider.of<DoorService>(context);
+
+    if (humService.isLoadingHum) {
+      return const Center(
+          child: SizedBox(
+              height: 150, width: 150, child: CircularProgressIndicator()));
+    }
+    
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -31,7 +57,7 @@ class HumidityScreen extends StatelessWidget {
                     size: 150,
                   ),
                   Text(
-                    "65 %",
+                    "${humService.humedad}%",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.staatliches(
                         fontSize: 64, color: Colors.white),
@@ -42,24 +68,11 @@ class HumidityScreen extends StatelessWidget {
             const SizedBox(
               height: 76,
             ),
-            Text(
-              "ESTADO DE PUERTAS",
-              style: GoogleFonts.staatliches(fontSize: 48, color: Colors.black),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                DoorButtonWidget(
-                  width: width,
-                  title: 'PUERTA 1',
-                ),
-                const SizedBox(width: 8),
-                DoorButtonWidget(
-                  width: width,
-                  title: 'PUERTA 2',
-                ),
-              ],
-            )
+            doorService.isLoadingdoor? 
+            const Center(
+              child: SizedBox(
+                height: 150, width: 150, child: CircularProgressIndicator()))
+            :DoorWidget(width: width, title1: "Puerta 1", title2: "Puerta 2", state: doorService.door,)
           ],
         ),
       ),

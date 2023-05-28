@@ -1,14 +1,14 @@
 {
-    "Humedad": 35,
-    "Puertas": true,
+    "Humedad": 235,
+    "Puertas": false,
     "historial": {
       "Temperatura": [
-        47,
-        42,
-        49,
-        40,
-        47,
-        45
+        67,
+        62,
+        69,
+        60,
+        67,
+        65
       ],
       "Time": [
         0,

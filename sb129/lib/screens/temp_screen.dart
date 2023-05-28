@@ -1,13 +1,41 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sb129/widgets/widgets.dart';
 
-class TempScreen extends StatelessWidget {
+import '../services/services.dart';
+
+class TempScreen extends StatefulWidget {
   const TempScreen({super.key});
+
+  @override
+  State<TempScreen> createState() => _TempScreenState();
+}
+
+class _TempScreenState extends State<TempScreen> {
+  @override
+  void initState() {
+    super.initState();
+    final histService = Provider.of<HistTempService>(context, listen: false);
+    histService.loadProducts();
+    final doorService = Provider.of<DoorService>(context, listen: false);
+    doorService.loadProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    HistTempService histService;
+    histService = Provider.of<HistTempService>(context);
+    DoorService doorService;
+    doorService = Provider.of<DoorService>(context);
+
+    if (histService.isLoading) {
+      return const Center(
+          child: SizedBox(
+              height: 150, width: 150, child: CircularProgressIndicator()));
+    }
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -30,7 +58,7 @@ class TempScreen extends StatelessWidget {
                     size: 95,
                   ),
                   Text(
-                    "15.82°C",
+                    "${histService.hist.temperatura.last}°C",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.staatliches(
                         fontSize: 48, color: Colors.white),
@@ -47,24 +75,11 @@ class TempScreen extends StatelessWidget {
             const SizedBox(
               height: 76,
             ),
-            Text(
-              "ESTADO DE PUERTAS",
-              style: GoogleFonts.staatliches(fontSize: 48, color: Colors.black),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                DoorButtonWidget(
-                  width: width,
-                  title: 'PUERTA 1',
-                ),
-                const SizedBox(width: 8),
-                DoorButtonWidget(
-                  width: width,
-                  title: 'PUERTA 2',
-                ),
-              ],
-            )
+            doorService.isLoadingdoor? 
+            const Center(
+              child: SizedBox(
+                height: 150, width: 150, child: CircularProgressIndicator()))
+            :DoorWidget(width: width, title1: "Puerta 1", title2: "Puerta 2", state: doorService.door,)
           ],
         ),
       ),
@@ -73,66 +88,4 @@ class TempScreen extends StatelessWidget {
   }
 }
 
-class DoorButtonWidget extends StatefulWidget {
-  const DoorButtonWidget({
-    super.key,
-    required this.width,
-    required this.title,
-  });
 
-  final double width;
-  final String title;
-
-  @override
-  State<DoorButtonWidget> createState() => _DoorButtonWidgetState();
-}
-
-class _DoorButtonWidgetState extends State<DoorButtonWidget> {
-  bool colorState = true;
-
-  void changeButton() {
-    colorState == true ? colorState = false : colorState = true;
-    setState(() {});
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-          ),
-          onPressed: changeButton,
-          child: Container(
-            height: 91,
-            width: widget.width / 3,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.black, //color of border
-                width: 1, //width of border
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              color: colorState == true
-                  ? const Color.fromRGBO(106, 213, 203, 100)
-                  : const Color.fromRGBO(201, 93, 99, 100),
-            ),
-            child: colorState == true
-                ? const Icon(Icons.lock)
-                : const Icon(Icons.lock_open),
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          widget.title,
-          textAlign: TextAlign.center,
-          style: GoogleFonts.raleway(fontSize: 16, color: Colors.black),
-        ),
-      ],
-    );
-  }
-}
