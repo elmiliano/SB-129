@@ -19,6 +19,7 @@ class _NavbarScreenState extends State<NavbarScreen> {
       pageController.animateToPage(index,
           duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
     }
+
     setState(() {});
   }
 
@@ -29,12 +30,11 @@ class _NavbarScreenState extends State<NavbarScreen> {
   List pages = <Widget>[
     const TempScreen(),
     const HumidityScreen(),
-    GraphScreen(key:UniqueKey())
+    GraphScreen(key: UniqueKey())
   ];
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
         // backgroundColor: Colors.white,
         body: Padding(
@@ -43,9 +43,11 @@ class _NavbarScreenState extends State<NavbarScreen> {
             children: [
               Expanded(
                 child: PageView.builder(
+                  onPageChanged: (int index) {
+                    changeScreen(index);
+                  },
                   controller: pageController,
                   itemBuilder: (context, index) {
-                    
                     return pages[index];
                   },
                 ),
@@ -59,11 +61,14 @@ class _NavbarScreenState extends State<NavbarScreen> {
             selectedItemColor: const Color.fromRGBO(48, 50, 61, 200),
             items: const [
               BottomNavigationBarItem(
-                  label: "temperatura", icon: Icon(Icons.thermostat_sharp, size: 35)),
+                  label: "temperatura",
+                  icon: Icon(Icons.thermostat_sharp, size: 35)),
               BottomNavigationBarItem(
-                  label: "humedad", icon: Icon(Icons.water_drop_rounded, size: 35)),
+                  label: "humedad",
+                  icon: Icon(Icons.water_drop_rounded, size: 35)),
               BottomNavigationBarItem(
-                  label: "historial", icon: Icon(Icons.auto_graph_outlined, size: 35)),
+                  label: "historial",
+                  icon: Icon(Icons.auto_graph_outlined, size: 35)),
             ],
             currentIndex: pageIndex,
             onTap: (int index) {
