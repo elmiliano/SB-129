@@ -58,10 +58,6 @@ class DoorWidget extends StatelessWidget {
             ),
           ],
         ),
-        // Text(
-        //       "ESTADO DE PUERTAS",
-        //       style: GoogleFonts.staatliches(fontSize: 32, color: Colors.black),
-        //     ),
             Padding(
               padding: const EdgeInsets.all(15),
               child: Row(
