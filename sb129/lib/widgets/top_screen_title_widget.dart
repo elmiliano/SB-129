@@ -31,12 +31,15 @@ class TopScreenTitleWidget extends StatelessWidget {
                 height: 66,
                 decoration: const BoxDecoration(
                     color: Color.fromRGBO(228, 228, 228, 100)),
-                child: Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.raleway(
-                      fontSize: 48,
-                      color: const Color.fromRGBO(139, 139, 139, 100)),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.raleway(
+                        fontSize: 36,
+                        color: const Color.fromRGBO(139, 139, 139, 100)),
+                  ),
                 ),
               ),
             ),
