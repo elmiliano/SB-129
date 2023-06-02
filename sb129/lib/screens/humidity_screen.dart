@@ -47,7 +47,7 @@ class _HumidityScreenState extends State<HumidityScreen> {
               height: 262,
               width: double.infinity,
               decoration: const BoxDecoration(
-                  color: Color.fromRGBO(106, 213, 203, 100)),
+                  color: Color.fromRGBO(106, 213, 203, 40)),
               child: Column(
                 //mainAxisAlignment: MainAxisAlignment.center,
                 children: [
