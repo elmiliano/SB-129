@@ -19,22 +19,25 @@ class _NavbarScreenState extends State<NavbarScreen> {
       pageController.animateToPage(index,
           duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
     }
+    //HistTempService();
     setState(() {});
   }
 
   int pageIndex = 0;
-  PageController pageController = PageController();
-
-  final pages = [
-    const TempScreen(),
-    const HumidityScreen(),
-    const GraphScreen()
-  ];
-
+  PageController pageController = PageController(keepPage: false);
   int index = 0;
+
+  List pages = <Widget>[
+    TempScreen(),
+    HumidityScreen(),
+    GraphScreen(key:UniqueKey())
+  ];
 
   @override
   Widget build(BuildContext context) {
+    
+    //setState(() {});
+    
     return Scaffold(
         backgroundColor: Colors.white,
         body: Padding(
@@ -42,10 +45,15 @@ class _NavbarScreenState extends State<NavbarScreen> {
           child: Column(
             children: [
               Expanded(
-                child: PageView(
+                child: PageView.builder(
                   controller: pageController,
-                  onPageChanged: changeScreen,
-                  children: pages,
+                  //onPageChanged: changeScreen,
+                  //itemCount: pages.length,
+                  //children: pages,
+                  itemBuilder: (context, index) {
+                    
+                    return pages[index];
+                  },
                 ),
               ),
             ],
@@ -64,6 +72,7 @@ class _NavbarScreenState extends State<NavbarScreen> {
           currentIndex: pageIndex,
           onTap: (int index) {
             changeScreen(index);
+            //setState(() { });
           },
         ));
   }

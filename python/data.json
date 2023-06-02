@@ -1,13 +1,22 @@
 {
-    "historial" : {
-        "temperatura" : {
-            "0" : [10, 0],
-            "1" : [20, 0],
-            "2" : [30, 0],
-            "3" : [40, 0],
-            "4" : [50, 0]
-        },
-        "humedad" : 60,
-        "puerta"  : true
+    "Humedad": 235,
+    "Puertas": false,
+    "historial": {
+      "Temperatura": [
+        67,
+        62,
+        69,
+        60,
+        67,
+        65
+      ],
+      "Time": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
     }
-}
+  }

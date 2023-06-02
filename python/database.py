@@ -1,10 +1,11 @@
-import firebase_admin # IF NOT DEFINED --IN TERMINAL--> pip3 install firebase-admin
+import firebase_admin # IF NOT DEFINED --IN TERMINAL--> pip3 install firebase-admin o python3 -m pip install firebase-admin
 
 from firebase_admin import credentials
 from firebase_admin import db
 import serial
 import time
 import json
+
 
 historial = {
             "temperatura": [],
