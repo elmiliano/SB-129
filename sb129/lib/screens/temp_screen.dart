@@ -48,7 +48,12 @@ class _TempScreenState extends State<TempScreen> {
               height: 262,
               width: double.infinity,
               decoration:
-                  const BoxDecoration(color: Color.fromRGBO(73, 109, 219, 100)),
+                  BoxDecoration(color: 
+                    (histService.hist.temperatura.last < 25) ? const Color.fromRGBO(73, 109, 219, 50)
+                    : (histService.hist.temperatura.last > 35) ? const Color.fromRGBO(201, 93, 99, 50)
+                    : const Color.fromRGBO(106, 213, 203, 30)
+                    
+                  ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
