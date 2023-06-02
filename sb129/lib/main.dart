@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'SB-129',
-        home: NavbarScreen()
+        home: LoginScreen()
         // routes: {
         // 'temp': (context) => TempScreen(),
         // 'humedad': (context) => HumidityScreen(),
