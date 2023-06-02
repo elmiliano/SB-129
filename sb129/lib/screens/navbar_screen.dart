@@ -19,7 +19,6 @@ class _NavbarScreenState extends State<NavbarScreen> {
       pageController.animateToPage(index,
           duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
     }
-    //HistTempService();
     setState(() {});
   }
 
@@ -28,18 +27,16 @@ class _NavbarScreenState extends State<NavbarScreen> {
   int index = 0;
 
   List pages = <Widget>[
-    TempScreen(),
-    HumidityScreen(),
+    const TempScreen(),
+    const HumidityScreen(),
     GraphScreen(key:UniqueKey())
   ];
 
   @override
   Widget build(BuildContext context) {
     
-    //setState(() {});
-    
     return Scaffold(
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.only(top: 40),
           child: Column(
@@ -47,9 +44,6 @@ class _NavbarScreenState extends State<NavbarScreen> {
               Expanded(
                 child: PageView.builder(
                   controller: pageController,
-                  //onPageChanged: changeScreen,
-                  //itemCount: pages.length,
-                  //children: pages,
                   itemBuilder: (context, index) {
                     
                     return pages[index];
@@ -59,21 +53,23 @@ class _NavbarScreenState extends State<NavbarScreen> {
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: const Color.fromRGBO(106, 213, 203, 100),
-          items: const [
-            BottomNavigationBarItem(
-                label: "temperature", icon: Icon(Icons.thermostat_sharp)),
-            BottomNavigationBarItem(
-                label: "humidity", icon: Icon(Icons.water_drop_rounded)),
-            BottomNavigationBarItem(
-                label: "graph", icon: Icon(Icons.auto_graph_outlined)),
-          ],
-          currentIndex: pageIndex,
-          onTap: (int index) {
-            changeScreen(index);
-            //setState(() { });
-          },
+        bottomNavigationBar: SizedBox(
+          height: 125,
+          child: BottomNavigationBar(
+            selectedItemColor: const Color.fromRGBO(48, 50, 61, 200),
+            items: const [
+              BottomNavigationBarItem(
+                  label: "temperatura", icon: Icon(Icons.thermostat_sharp, size: 35)),
+              BottomNavigationBarItem(
+                  label: "humedad", icon: Icon(Icons.water_drop_rounded, size: 35)),
+              BottomNavigationBarItem(
+                  label: "historial", icon: Icon(Icons.auto_graph_outlined, size: 35)),
+            ],
+            currentIndex: pageIndex,
+            onTap: (int index) {
+              changeScreen(index);
+            },
+          ),
         ));
   }
 }

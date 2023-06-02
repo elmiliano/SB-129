@@ -18,25 +18,68 @@ class DoorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-              "ESTADO DE PUERTAS",
-              style: GoogleFonts.staatliches(fontSize: 48, color: Colors.black),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 55,
+              width: 33,
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomLeft: Radius.circular(10)),
+                  color: Color.fromRGBO(228, 228, 228, 100)),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                DoorButtonWidget(
-                  width: width,
-                  title: title1,
-                  colorState: state,
+            Expanded(
+              child: Container(
+                height: 55,
+                decoration: const BoxDecoration(
+                    color: Color.fromRGBO(228, 228, 228, 100)),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Text(
+                    "ESTADO DE PUERTAS",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.staatliches(
+                        fontSize: 32,
+                        color: Colors.black),
+                  ),
                 ),
-                const SizedBox(width: 8),
-                DoorButtonWidget(
-                  width: width,
-                  title: title2,
-                  colorState: state,
-                ),
-              ],
+              ),
+            ),
+            Container(
+              height: 55,
+              width: 33,
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      bottomRight: Radius.circular(10)),
+                  color: Color.fromRGBO(228, 228, 228, 100)),
+            ),
+          ],
+        ),
+        // Text(
+        //       "ESTADO DE PUERTAS",
+        //       style: GoogleFonts.staatliches(fontSize: 32, color: Colors.black),
+        //     ),
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  DoorButtonWidget(
+                    width: width,
+                    title: title1,
+                    colorState: state,
+                  ),
+                  const SizedBox(width: 8),
+                  DoorButtonWidget(
+                    width: width,
+                    title: title2,
+                    colorState: state,
+                  ),
+                ],
+              ),
             )
       ],
     );
@@ -74,10 +117,10 @@ class _DoorButtonWidgetState extends State<DoorButtonWidget> {
               color: Colors.black, //color of border
               width: 1, //width of border
             ),
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
             color: widget.colorState == true
-                ? const Color.fromRGBO(106, 213, 203, 100)
-                : const Color.fromRGBO(201, 93, 99, 100),
+                ?  Colors.green[400]
+                :  Colors.red[300],
           ),
           child: widget.colorState == true
               ? const Icon(Icons.lock)

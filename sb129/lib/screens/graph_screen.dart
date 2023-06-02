@@ -37,8 +37,6 @@ class _GraphScreenState extends State<GraphScreen> {
           child: SizedBox(
               height: 150, width: 150, child: CircularProgressIndicator()));
     }
-    print("En pantalla de grafica");
-    print(histService.hist.temperatura);
 
     final List<ChartData> chartData = [];
 
@@ -59,6 +57,7 @@ class _GraphScreenState extends State<GraphScreen> {
                   title: 'historial',
                 ),
               ),
+              const SizedBox( height: 10 ),
               Container(
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -162,30 +161,35 @@ class _TablaDeTempsState extends State<TablaDeTemps> {
       data.add({'timePassed': widget.time[i], 'temp': widget.temp[i]});
     }
 
-    return DataTable(columns: <DataColumn>[
-      DataColumn(
-        label: Expanded(
-          child: Center(
-            child: Text(
-              'Grados',
-              style:
-                  GoogleFonts.raleway(textStyle: const TextStyle(fontSize: 18)),
+    return Container(
+      constraints: const BoxConstraints(maxHeight: 250),
+      child: SingleChildScrollView(
+        child: DataTable(columns: <DataColumn>[
+          DataColumn(
+            label: Expanded(
+              child: Center(
+                child: Text(
+                  'Grados',
+                  style:
+                      GoogleFonts.raleway(textStyle: const TextStyle(fontSize: 18)),
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-      DataColumn(
-        label: Expanded(
-          child: Center(
-            child: Text(
-              'Tiempo',
-              style:
-                  GoogleFonts.raleway(textStyle: const TextStyle(fontSize: 18)),
+          DataColumn(
+            label: Expanded(
+              child: Center(
+                child: Text(
+                  'Tiempo',
+                  style:
+                      GoogleFonts.raleway(textStyle: const TextStyle(fontSize: 18)),
+                ),
+              ),
             ),
           ),
-        ),
+        ], rows: _createRows()),
       ),
-    ], rows: _createRows());
+    );
   }
 
   List<DataRow> _createRows() {
@@ -196,7 +200,7 @@ class _TablaDeTempsState extends State<TablaDeTemps> {
                       style: GoogleFonts.raleway(
                           textStyle: const TextStyle(fontSize: 15))))),
               DataCell(Center(
-                  child: Text('Hace ${dato['timePassed']} segundos.',
+                  child: Text('${dato['timePassed']} hrs',
                       style: GoogleFonts.raleway(
                           textStyle: const TextStyle(fontSize: 15))))),
             ]))

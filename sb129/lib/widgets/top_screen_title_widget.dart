@@ -11,7 +11,8 @@ class TopScreenTitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8, top: 25),
+      // padding: const EdgeInsets.all(8.0),
       child: SizedBox(
         width: double.infinity,
         child: Row(
@@ -19,12 +20,12 @@ class TopScreenTitleWidget extends StatelessWidget {
           children: [
             Container(
               height: 66,
-              width: 66,
+              width: 33,
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       bottomLeft: Radius.circular(10)),
-                  color: Color.fromRGBO(106, 213, 203, 100)),
+                  color: Color.fromRGBO(228, 228, 228, 100)),
             ),
             Expanded(
               child: Container(
@@ -36,21 +37,21 @@ class TopScreenTitleWidget extends StatelessWidget {
                   child: Text(
                     title,
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.raleway(
+                    style: GoogleFonts.staatliches(
                         fontSize: 36,
-                        color: const Color.fromRGBO(139, 139, 139, 100)),
+                        color: Colors.black),
                   ),
                 ),
               ),
             ),
             Container(
               height: 66,
-              width: 66,
+              width: 33,
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(10),
                       bottomRight: Radius.circular(10)),
-                  color: Color.fromRGBO(106, 213, 203, 100)),
+                  color: Color.fromRGBO(228, 228, 228, 100)),
             ),
           ],
         ),

@@ -43,30 +43,35 @@ class _HumidityScreenState extends State<HumidityScreen> {
             const TopScreenTitleWidget(
               title: 'humedad',
             ),
-            Container(
-              height: 262,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                  color: Color.fromRGBO(106, 213, 203, 40)),
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.water_outlined,
-                    color: Colors.white,
-                    size: 150,
-                  ),
-                  Text(
-                    "${humService.humedad}%",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.staatliches(
-                        fontSize: 64, color: Colors.white),
-                  ),
-                ],
+            Padding(
+              padding: const EdgeInsets.only( left: 10, right: 10, top: 10),
+              child: Container(
+                height: 262,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    color: Colors.blue[200]
+                    ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.water_drop_rounded,
+                      color: Color.fromRGBO(73, 109, 219, 50),
+                      size: 90,
+                    ),
+                    Text(
+                      "${humService.humedad}%",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.staatliches(
+                          fontSize: 64, color: Colors.white),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(
-              height: 76,
+              height: 60,
             ),
             doorService.isLoadingdoor? 
             const Center(

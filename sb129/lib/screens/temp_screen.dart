@@ -44,41 +44,46 @@ class _TempScreenState extends State<TempScreen> {
             const TopScreenTitleWidget(
               title: 'temperatura',
             ),
-            Container(
-              height: 262,
-              width: double.infinity,
-              decoration:
-                  BoxDecoration(color: 
-                    (histService.hist.temperatura.last < 25) ? const Color.fromRGBO(73, 109, 219, 50)
-                    : (histService.hist.temperatura.last > 35) ? const Color.fromRGBO(201, 93, 99, 50)
-                    : const Color.fromRGBO(106, 213, 203, 30)
-                    
-                  ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.thermostat_outlined,
-                    color: Colors.red,
-                    size: 95,
-                  ),
-                  Text(
-                    "${histService.hist.temperatura.last}°C",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.staatliches(
-                        fontSize: 48, color: Colors.white),
-                  ),
-                  Text(
-                    "Temperatura Ambiente\n16.2°C/24.16°C",
-                    textAlign: TextAlign.center,
-                    style:
-                        GoogleFonts.raleway(fontSize: 13, color: Colors.white),
-                  ),
-                ],
+            Padding(
+              padding: const EdgeInsets.only( left: 10, right: 10, top: 10),
+              child: Container(
+                height: 262,
+                width: double.infinity,
+                decoration:
+                    BoxDecoration(color: 
+                      (histService.hist.temperatura.last < 25) ? const Color.fromRGBO(73, 109, 219, 50)
+                      : (histService.hist.temperatura.last > 35) ? const Color.fromRGBO(201, 93, 99, 50)
+                      : const Color.fromRGBO(106, 213, 203, 60),
+
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      
+                    ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.thermostat_outlined,
+                      color: Colors.red,
+                      size: 95,
+                    ),
+                    Text(
+                      "${histService.hist.temperatura.last}°C",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.staatliches(
+                          fontSize: 48, color: Colors.white),
+                    ),
+                    Text(
+                      "Temperatura Ambiente\n16.2°C/24.16°C",
+                      textAlign: TextAlign.center,
+                      style:
+                          GoogleFonts.raleway(fontSize: 13, color: Colors.white),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(
-              height: 76,
+              height: 60,
             ),
             doorService.isLoadingdoor? 
             const Center(
