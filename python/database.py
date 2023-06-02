@@ -25,8 +25,7 @@ if __name__ == "__main__":
         port  = 'COM3'
         data  = ''
         count = 0
-        delay = 5
-        ctd   = 3
+        ctd   = 10
 
         cred = credentials.Certificate(path)
         firebase_admin.initialize_app(cred, {'databaseURL': databaseURL})
@@ -54,6 +53,8 @@ def clean(data, ctd):
     
     list = data.split(';')
 
+    door = True
+
     # print(list)
 
     t = time.localtime()
@@ -69,10 +70,15 @@ def clean(data, ctd):
                 historial["temperatura"].pop(0)
                 historial["time"].pop(0)
 
+            if ( list[2] == '1' ) :
+                door = True
+            else:
+                door = False
+
             final_data = {
                 "temperatura" : float(list[0]),
                 "humedad" : float(list[1]),
-                "puerta" : float(list[2]),
+                "puerta" : door,
                 "historial" : {
                     "temperatura": historial["temperatura"],
                     "time": historial["time"]
